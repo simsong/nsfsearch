@@ -7,7 +7,11 @@ from setuptools.command.test import test as TestCommand
 from distutils.version import StrictVersion
 from setuptools import __version__ as setuptools_version
 
-if StrictVersion(setuptools_version) < StrictVersion('38.3.0'):
+st_version = setuptools_version
+dot_point = st_version.find(".post")
+if dot_point>0:
+    st_version = st_version[0:dot_point]
+if StrictVersion(st_version) < StrictVersion('38.3.0'):
     raise SystemExit(
         'Your `setuptools` version is old. '
         'Please upgrade setuptools by running `pip install -U setuptools` '
